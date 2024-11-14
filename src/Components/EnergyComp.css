@@ -1,0 +1,224 @@
+/* EnergyComp.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 65vh;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+}
+
+.menubar {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.costenergy {
+  color: var(--Gray---Typography-400, #697483);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-xs/[R] */
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  width: 8vw;
+  margin-left: 30%;
+  vertical-align: middle;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.chartheight {
+  margin-top: 5%;
+  height: 80%;
+}
+
+.title {
+  color: #000;
+  text-align: left;
+  font-feature-settings: "liga" off, "clig" off;
+  vertical-align: baseline;
+  margin-top: auto;
+  margin-bottom: 0;
+
+  /* Paragraph/text-md/[R] */
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.styled-radio-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 16px; /* Add space between radio buttons */
+}
+
+.button {
+  border-radius: 8px;
+  display: flex;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--Neutral-White, #fff);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-md/[R] */
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.styled-form-control-label {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-100, #eaecf0);
+  padding: 4px 8px; /* Padding for each button */
+  margin: 0; /* Remove margin between buttons */
+  display: flex;
+  cursor: pointer;
+  color: var(--Gray---Typography-500, #445164);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-xs/[R] */
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.styled-form-control-label:hover {
+  background-color: #f3f4f6; /* Hover background */
+}
+
+.styled-form-control-label .MuiFormControlLabel-label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151; /* Custom text color */
+}
+
+.styled-form-control-label .MuiRadio-root {
+  padding: 0 8px; /* Padding for radio icon */
+  color: #374151; /* Default color for unchecked */
+}
+
+.styled-form-control-label .MuiRadio-root.Mui-checked {
+  color: #6b3ceb; /* Color when checked */
+}
+
+.meter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: var(--Gray-800, #758195);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-xs/[R] */
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.energy-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+}
+
+.stat-section {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.edit-button {
+  display: flex;
+  gap: 0;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  width: 45%;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid var(--Gray---Typography-100, #dadce0);
+  background: #fff;
+}
+
+.stat-title {
+  color: var(--Gray---Typography-400, #697483);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-sm/[R] */
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  display: flex;
+  gap: 3vw;
+}
+
+.percentage-change {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.percentage-change.positive {
+  color: #4caf50;
+}
+
+.percentage-change.negative {
+  color: #f44336;
+}
+
+.percentage-change i {
+  margin-right: 5px;
+}
+
+.cost-value {
+  color: var(--color-grey-grey-900, #303442);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* UI Type/text-xl/[S] */
+  font-family: "DM Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}

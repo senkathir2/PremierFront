@@ -1,7 +1,8 @@
 import React from "react";
-import Header from "../Components/Header";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
+import DashHeader from "../Components/DashHeader";
+
 
 const Container = styled.div`
   display: block;
@@ -12,7 +13,7 @@ const Container = styled.div`
 const Dashboard = () => {
   return (
     <Container>
-      <Header />
+      <DashHeader title={"Dashboard"}/>
       <Outlet />
     </Container>
   );

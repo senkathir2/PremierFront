@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import SidebarTree from "./SidebarTree";
+import SideBarInfo from "../sidbarInfo";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   height: 100vh;
@@ -25,32 +28,17 @@ const Paragraph = styled.p`
   line-height: 16px; /* 133.333% */
 `;
 
-const endpoint = [
-  {
-    id: 1,
-    Title: "first",
-    APIEndpoint: "?",
-  },
-  {
-    id: 2,
-    Title: "second",
-    APIEndpoint: "?",
-  },
-  {
-    id: 3,
-    Title: "third",
-    APIEndpoint: "?",
-  },
-];
+const Sidebar = ({handleItemId}) => {
+  const [key, setKey] = useState("")
+  const location = useLocation()
 
-const Sidebar = () => {
+  const handleItemIdChange = (itemId) => {
+    handleItemId(itemId)
+  }
+
   return (
     <Container>
-      {endpoint.map((ele) => (
-        <div key={ele.id}>
-          <Paragraph>{ele.Title}</Paragraph>
-        </div>
-      ))}
+      <SidebarTree treeArray={SideBarInfo.sideBarTreeArray[location.pathname.split('/')[2]]} handleItemIdChange={handleItemIdChange}/>
     </Container>
   );
 };

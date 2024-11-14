@@ -1,0 +1,119 @@
+.stacked-bar-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 2vh;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1vh;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.chart-size {
+  height: 50vh;
+}
+
+.powerchart-size {
+  height: 25vh;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1vh;
+}
+
+.title {
+  color: var(--Gray---Typography-700, #242f3e);
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.controls {
+  display: flex;
+  gap: 2vw;
+}
+
+.chart-content {
+  height: 50vh;
+  display: flex;
+}
+
+.current-chart {
+  flex: 1;
+  width: 40%;
+  height: 50vh;
+}
+
+.contentpower {
+  display: flex;
+  gap: 1vw;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+}
+
+.contentpowerbox {
+  border-radius: 4px;
+  border: 1px solid var(--Gray---Typography-100, #dadce0);
+  background: #fff;
+
+  flex: 1;
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.contpowertit {
+  color: var(--Gray---Typography-700, #242f3e);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* Paragraph/text-sm/[R] */
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.contpowerpara {
+  color: var(--Gray---Typography-400, #697483);
+  font-feature-settings: "liga" off, "clig" off;
+  /* Paragraph/text-xs/[R] */
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.contpowerval {
+  color: var(--Gray---Typography-800, #1b2533);
+  font-feature-settings: "liga" off, "clig" off;
+  /* UI Type/text-xl/[S] */
+  font-family: "DM Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}

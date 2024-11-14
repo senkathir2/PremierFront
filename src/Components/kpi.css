@@ -1,0 +1,116 @@
+.kpi-cont {
+  padding: 16px 0px 0px 0px;
+  gap: 32px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 18vw;
+  opacity: 1;
+  padding: 3vh;
+  border-radius: 4px;
+  box-shadow: 7px 2px 17px 0px #c7c7c71a, 29px 10px 31px 0px #c7c7c717,
+    66px 22px 42px 0px #c7c7c70d;
+}
+
+.kpi-conttwo {
+  padding: 16px 0px 0px 0px;
+  gap: 32px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 27vh;
+  width: 19vw;
+  opacity: 1;
+  padding: 3vh;
+  border-radius: 4px;
+  box-shadow: 7px 2px 17px 0px #c7c7c71a, 29px 10px 31px 0px #c7c7c717,
+    66px 22px 42px 0px #c7c7c70d;
+}
+
+.kpi-top {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+}
+
+.kpi-tit {
+  font-family: DM Sans;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  color: #697483;
+}
+
+.kpi-val {
+  font-family: DM Sans;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+  color: #000000;
+}
+
+.kpi-units {
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+  color: #595d62;
+}
+
+.kpi-bot {
+  flex: 1;
+  border-top: 1px solid #f5f6f7;
+  padding-top: 1vh;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.kpi-bot2 {
+  border-top: 1px solid #f5f6f7;
+  padding-top: 1vh;
+}
+
+.percentage-cont {
+  color: var(--Success-700, #137a5f);
+  border-radius: 50px;
+  background: var(--Success-50, #e8f5f1);
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 12px;
+  text-align: left;
+  padding: 0.5vh;
+}
+
+.percentage-span {
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+  color: #000000;
+  margin-left: 0.5vw;
+}
+
+.figuretext {
+  color: var(--Gray---Typography-700, #242f3e);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Paragraph/text-sm/[R] */
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  margin-left: auto;
+  margin-right: auto;
+}

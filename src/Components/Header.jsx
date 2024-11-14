@@ -18,7 +18,6 @@ const TopbarContainer = styled.div`
   height: var(--height-h-12, 48px);
   padding: var(--py-0, 0px) 24px;
   align-items: flex-end;
-  gap: 10vw;
   flex-shrink: 0;
   overflow-y: hidden;
   background-color: #ffffff;

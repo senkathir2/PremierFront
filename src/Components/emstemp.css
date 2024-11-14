@@ -1,0 +1,58 @@
+.emstitle {
+  color: var(--Gray---Typography-800, #1b2533);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* UI Type/text-2xl/[S] */
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 133.333% */
+}
+
+.realtimeflex {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.emsspan {
+  color: var(--Gray---Typography-600, #323e4f);
+  font-feature-settings: "liga" off, "clig" off;
+
+  /* UI Type/text-sm/[R] */
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.emstit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  text-transform: capitalize;
+}
+
+.emsbutton {
+  background-color: #6b3ceb;
+  color: #fff;
+  font-feature-settings: "liga" off, "clig" off;
+  /* UI Type/text-sm/[R] */
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  display: flex;
+  gap: 0.5vw;
+  padding: 10px 20px 10px 20px;
+  border-radius: var(--Surface-border-radius---radius-s-xs, 4px);
+}
+
+.emsbuttonicon {
+  color: #fff;
+}
