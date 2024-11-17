@@ -12,8 +12,6 @@ import RealTimeVoltageChart from "../Components/VoltageChart";
 import BottomTimeSeries from "../Components/TimeseriesDash";
 import RealTimeChart from "../Components/Composite";
 //import "../Components/emstemp.css"
-import SideBarInfo from "../sidbarInfo";
-import sidbarInfo from "../sidbarInfo";
 
 const Container = styled.div`
   display: flex;
@@ -51,7 +49,8 @@ const TestPage = () => {
 
   useEffect(() => {
 
-  },[key])
+  }, [key])
+
 
   return (
     <Container>
@@ -59,16 +58,7 @@ const TestPage = () => {
         <Sidebar handleItemId={handleItemIdChange} />
       </SidebarComp>
       <OutLetContainer>
-        <DashHeader title={key.toUpperCase()} />
-        <div style={{ display: "flex", gap: "2%", maxHeight: "fit-content" }}>
-          <AMFgauge />
-          <KPI />
-          <div style={{ display: "flex", gap: "5px", flexDirection: "column" }}>
-            <PowerFactorGauge />
-            <PowerFactorGauge />
-          </div>
-          <WeatherWidget />
-        </div>
+        <DashHeader apikey={key}/>
         <div className="emstit">
           <span className="emstitle">Real - Time Consumption</span>
           <span className="emsspan">Status: Running EB power</span>
@@ -78,8 +68,8 @@ const TestPage = () => {
           style={{ gap: "10px", display: "flex" }}
         >
           <RealTimeChart apiKey={key} />
-          <RealTimeCurrentChart apiKey={key}/>
-          <RealTimeVoltageChart apiKey={key}/>
+          <RealTimeCurrentChart apiKey={key} />
+          <RealTimeVoltageChart apiKey={key} />
         </ChartContainer>
         <div className="emstit">
           <span className="emstitle">Energy Consumption History</span>
@@ -89,11 +79,8 @@ const TestPage = () => {
           </span>
         </div>
         <div style={{ width: "70vw" }}>
-          <BottomTimeSeries />
+          <BottomTimeSeries apikey={key} />
         </div>
-        <RealTimeChart apiKey={key} />
-        <RealTimeCurrentChart />
-        <RealTimeVoltageChart />
         <Outlet />
       </OutLetContainer>
     </Container>

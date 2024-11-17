@@ -13,7 +13,6 @@ const Container = styled.div`
 const Dashboard = () => {
   return (
     <Container>
-      <DashHeader title={"Dashboard"}/>
       <Outlet />
     </Container>
   );

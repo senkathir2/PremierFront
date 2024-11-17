@@ -18,8 +18,12 @@ import VerticalChart from "./BarchartVertical";
 import CostChart from "./CostChart";
 import CombinedChart from "./Combine";
 import DataTable from "./TableDGEB";
+import VoltageHistorical from "./VoltageHist";
+import CurrentHistorical from "./CurrentHist";
+import PowerfactorAndFreqHistorical from "./PowerFactorAndFreqHist";
+import sidbarInfo from "../sidbarInfo";
 
-const BottomTimeSeries = () => {
+const BottomTimeSeries = ({apikey}) => {
   // Initialize state with default values
   const [startDate, setStartDate] = useState(dayjs().startOf("day"));
   const [endDate, setEndDate] = useState(dayjs());
@@ -31,7 +35,7 @@ const BottomTimeSeries = () => {
   const fetchData = async (start, end, period) => {
     try {
       const response = await fetch(
-        `http://14.96.26.26:8080/api/p1_ups2_incomer2c/?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`
+        `${sidbarInfo.apiUrls[apikey].apiUrl}?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`
       );
       const result = await response.json();
       setData(result);
@@ -43,10 +47,10 @@ const BottomTimeSeries = () => {
 
   // Fetch data on initial render and whenever startDate, endDate, or timeperiod changes
   useEffect(() => {
-    if (startDate && endDate) {
+    if (startDate && endDate && sidbarInfo.apiUrls[apikey]) {
       fetchData(startDate, endDate, timeperiod);
     }
-  }, [startDate, endDate, timeperiod]);
+  }, [startDate, endDate, timeperiod, apikey]);
 
   // Handle time period change
   const handleChange = (event, newAlignment) => {
@@ -127,6 +131,42 @@ const BottomTimeSeries = () => {
               backgroundColors={bgsource}
             />
             <CostChart
+              data={data}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              timeperiod={timeperiod}
+              setTimeperiod={setTimeperiod}
+              dateRange={dateRange}
+              setDateRange={setDateRange}
+              backgroundColors={bgsource}
+            />
+            <VoltageHistorical
+              data={data}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              timeperiod={timeperiod}
+              setTimeperiod={setTimeperiod}
+              dateRange={dateRange}
+              setDateRange={setDateRange}
+              backgroundColors={bgsource}
+            />
+            <CurrentHistorical 
+              data={data}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              timeperiod={timeperiod}
+              setTimeperiod={setTimeperiod}
+              dateRange={dateRange}
+              setDateRange={setDateRange}
+              backgroundColors={bgsource}
+            />
+            <PowerfactorAndFreqHistorical
               data={data}
               startDate={startDate}
               setStartDate={setStartDate}

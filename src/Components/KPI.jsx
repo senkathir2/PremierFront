@@ -24,6 +24,7 @@ const KPI = ({ data }) => {
     monthlyConsumption: 0,
     todayConsumption: 0,
     energyCost: 0,
+    peakCurrent: 0
   });
 
   console.log("KPI data", data);
@@ -35,36 +36,35 @@ const KPI = ({ data }) => {
       const resampled = data["resampled data"];
 
       // Calculate total consumption from resampled data
-      const totalConsumption =
-        (today.EBS10Reading_kwh || 0) +
-        (today.DG1S12Reading_kwh || 0) +
-        (today.DG2S3Reading_kwh || 0);
+      // const totalConsumption =
+      //   (today.EBS10Reading_kwh || 0) +
+      //   (today.DG1S12Reading_kwh || 0) +
+      //   (today.DG2S3Reading_kwh || 0);
+
+      const currentArray = resampled.map((item) => Math.max(item["r_current"], item["y_current"], item["b_current"]))
+      const peakCurrent = Math.max(...currentArray)
 
       // Calculate today's consumption from today data
-      const todayConsumption =
-        (today.EBS10Reading_kw || 0) +
-        (today.DG1S12Reading_kw || 0) +
-        (today.DG2S3Reading_kw || 0);
+      // const todayConsumption =
+      //   (today.EBS10Reading_kw || 0) +
+      //   (today.DG1S12Reading_kw || 0) +
+      //   (today.DG2S3Reading_kw || 0);
 
-      // Calculate monthly energy consumption from resampled data
-      const monthlyConsumption = resampled.reduce((total, item) => {
-        return total + (item.EBS10Reading_kw || 0);
-      }, 0);
+      // // Calculate monthly energy consumption from resampled data
+      // const monthlyConsumption = resampled.reduce((total, item) => {
+      //   return total + (item.EBS10Reading_kw || 0);
+      // }, 0);
 
-      // Calculate energy cost (example: assume $0.10 per kWh)
-      const energyCost = (monthlyConsumption * 0.1).toFixed(2);
+      // // Calculate energy cost (example: assume $0.10 per kWh)
+      // const energyCost = (monthlyConsumption * 0.1).toFixed(2);
 
       const efficiency = 78; // Example efficiency calculation
       const pendingAlerts = 18; // Assuming alerts are part of recent data
 
       setKpiData({
-        actpow: todayConsumption,
-        total: totalConsumption / 1000, // Convert to MWh
         efficiency,
         pendingAlerts,
-        monthlyConsumption, // Add monthly consumption to state
-        todayConsumption, // Add today's consumption to state
-        energyCost, // Add energy cost to state
+        peakCurrent:peakCurrent
       });
     }
   }, [data]);
@@ -77,13 +77,13 @@ const KPI = ({ data }) => {
         {/* Monthly Energy Consumption Card */}
         <div className="kpi-cont">
           <div className="kpi-top">
-            <div className="kpi-tit">Monthly Energy Consumption</div>
+            <div className="kpi-tit">Peak Current</div>
             <div style={{ display: "inline" }}>
               <span className="kpi-val">
                 {" "}
-                {kpiData.monthlyConsumption.toLocaleString()}{" "}
+                {kpiData.peakCurrent.toFixed(2)}{" "}
               </span>
-              <span className="kpi-units"> kWh </span>
+              <span className="kpi-units">  </span>
             </div>
           </div>
           <div className="kpi-bot">
@@ -98,11 +98,11 @@ const KPI = ({ data }) => {
         {/* Today's Energy Consumption Card */}
         <div className="kpi-cont">
           <div className="kpi-top">
-            <div className="kpi-tit">Today's Energy Consumption</div>
+            <div className="kpi-tit">Peak Power</div>
             <div style={{ display: "inline" }}>
               <span className="kpi-val">
                 {" "}
-                {kpiData.todayConsumption.toLocaleString()}{" "}
+                {kpiData.todayConsumption}{" "}
               </span>
               <span className="kpi-units"> kWh </span>
             </div>

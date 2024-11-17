@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, ButtonGroup, Icon } from "@mui/material";
-import {
-  CalendarMonth,
-  CloudDownload,
-  
-} from "@mui/icons-material";
-
-
+import { CalendarMonth, CloudDownload } from "@mui/icons-material";
+import TimeBar from "./TRFF/TimePeriod";
+import dayjs from "dayjs";
+import sidbarInfo from "../sidbarInfo";
+import PowerFactorGauge from "./PowerFactor";
+import FrequencyComponent from "./Frequency";
+import KPI from "./KPI";
+import AMFgauge from "./AmfGauge";
+import WeatherWidget from "./Weather";
 
 const DashboardHeader = styled.div`
   display: flex;
@@ -48,24 +50,59 @@ const StyledButtons = styled(Button)`
   align-items: center;
   gap: 8px;
 `;
-const DashHeader = ({title}) => {
-  return (
-    <DashboardHeader>
-        <DashboardTitle>{title}</DashboardTitle>
-        <FilterButtons>
-          <StyledButtons>Day</StyledButtons>
-          <StyledButtons>Week</StyledButtons>
-          <StyledButtons>Month</StyledButtons>
-          <StyledButtons>Year</StyledButtons>
-        </FilterButtons>
-        <Button variant="text" startIcon={<CalendarMonth />}>
-          Select Range
-        </Button>
-        <Button variant="contained" startIcon={<CloudDownload />}>
-          Generate Report
-        </Button>
-      </DashboardHeader>
-  )
-}
+const DashHeader = ({ apikey }) => {
+  const [startDate, setStartDate] = useState(dayjs().startOf("day"));
+  const [endDate, setEndDate] = useState(dayjs());
+  const [timeperiod, setTimeperiod] = useState("H");
+  const [dateRange, setDateRange] = useState("today");
+  const [data, setData] = useState(null);
 
-export default DashHeader
+  const fetchData = async (start, end, period) => {
+    try {
+      const response = await fetch(
+        `${
+          sidbarInfo.apiUrls[apikey].apiUrl
+        }?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`
+      );
+      const result = await response.json();
+      setData(result);
+      console.log("datatimedash", result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (startDate && endDate && sidbarInfo.apiUrls[apikey]) {
+      fetchData(startDate, endDate, timeperiod);
+    }
+  }, [startDate, endDate, timeperiod, apikey]);
+
+  return (
+    <div>
+      <DashboardHeader>
+        <DashboardTitle>{apikey}</DashboardTitle>
+        <TimeBar
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          setTimeperiod={setTimeperiod} // Pass setTimeperiod to TimeBar
+          startDate={startDate} // Pass startDate
+          endDate={endDate} // Pass endDate
+        />
+      </DashboardHeader>
+      <div style={{ display: "flex", gap: "2%", maxHeight: "fit-content" }}>
+        <AMFgauge />
+        <KPI data={data}/>
+        <div style={{ display: "flex", gap: "5px", flexDirection: "column" }}>
+          <PowerFactorGauge apikey={apikey} />
+          <FrequencyComponent apikey={apikey} />
+        </div>
+        <WeatherWidget />
+      </div>
+    </div>
+  );
+};
+
+export default DashHeader;

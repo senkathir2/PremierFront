@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import { Launch } from "@mui/icons-material";
 import "./PowerFactorGauge.css"; // Adjust the path as needed
+import sidbarInfo from "../sidbarInfo";
 
 // Styled Components for Consistent Card Design
 const Container = styled.div`
@@ -43,16 +44,16 @@ const GaugeCont = styled.div`
   margin-right: auto;
 `;
 
-const PowerFactorGauge = () => {
+const PowerFactorGauge = ({apikey}) => {
   const [powerFactor, setPowerFactor] = useState(95); // Initial dummy data
   const [powerQuality, setPowerQuality] = useState("Loading...");
 
   const fetchPowerFactor = async () => {
     try {
       const response = await axios.get(
-        "https://www.therion.co.in/api/ebs10reading/"
+        sidbarInfo.apiUrls[apikey].apiUrl
       );
-      const powerFactorValue = response.data["recent data"].power_factor;
+      const powerFactorValue = Math.floor(response.data["recent data"].avg_power_factor*100);
       setPowerFactor(powerFactorValue);
 
       if (powerFactorValue >= 0.95) {
@@ -71,7 +72,7 @@ const PowerFactorGauge = () => {
     fetchPowerFactor();
     const interval = setInterval(fetchPowerFactor, 5000); // Update every 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [apikey]);
 
   return (
     <>

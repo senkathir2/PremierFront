@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import "chart.js/auto";
 import dayjs from "dayjs";
 import TimeBar from "./TRFF/TimePeriod"; // Ensure this path is correct
@@ -7,7 +7,7 @@ import ToggleButtons from "./Togglesampling"; // Import the ToggleButtons compon
 //import DateRangeSelector from "./Daterangeselector"; // Import the DateRangeSelector component
 import "./StackedBarDGEB.css"; // Import the CSS file
 
-const CostChart = ({
+const CurrentHistorical = ({
   data,
   startDate,
   setStartDate,
@@ -38,16 +38,50 @@ const CostChart = ({
         // Generate x-axis labels based on selected time period
         const xAxisLabels = generateXAxisLabels(resampledData);
 
-        const datasets = [{
-          label: 'Cost',
-          data: resampledData.map((item) => (item['app_energy_export'] || 0) * 10), // Multiply kW by 10 to get cost
-          backgroundColor: '#4E46B4'
-        }];
+        const datasets = [
+            {
+              label: "Avg Current",
+              data: resampledData.map((item) => item["avg_current"]),
+              borderColor: "#6036D4",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "R Current",
+              data: resampledData.map((item) => item["r_current"]),
+              borderColor: "#D33030",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "Y Current",
+              data: resampledData.map((item) => item["y_current"]),
+              borderColor: "#FFB319",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "B Current",
+              data: resampledData.map((item) => item["b_current"]),
+              borderColor: "#017EF3",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+          ]
 
         setChartData({
           labels: xAxisLabels,
           datasets: datasets,
         });
+
       } catch (error) {
         console.error("Error processing data", error);
         setError(error.message);
@@ -107,12 +141,39 @@ const CostChart = ({
     return <div>{error}</div>;
   }
 
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: {
+          color: "rgba(0, 0, 0, 0.05)",
+          borderDash: [5, 5],
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Volatage (V)",
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0.05)",
+          borderDash: [5, 5],
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false, // Hide default legend
+      },
+    },
+  };
+
   return (
     <div className="stacked-bar-container">
       <div className="card shadow mb-4">
         <div className="card-body">
           <div className="row">
-            <div className="title">Energy Cost by Source (Rs)</div>
+            <div className="title">Current</div>
             <div className="controls">
               <TimeBar
                 setStartDate={setStartDate}
@@ -141,46 +202,9 @@ const CostChart = ({
 
           {chartData && chartData.labels && chartData.labels.length > 0 ? (
             <div className="chart-size">
-              <Bar
+              <Line
                 data={chartData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  plugins: {
-                    legend: {
-                      display: true,
-                      position: "bottom", // Position legend at the bottom
-                      align: "start", // Align legends to the start of the container
-                      labels: {
-                        boxWidth: 15,
-                        boxHeight: 15,
-                        padding: 20,
-                        font: {
-                          size: 14,
-                          family: "DM Sans",
-                        },
-                        usePointStyle: true,
-                        color: "#333",
-                      },
-                    },
-                  },
-                  // scales: {
-                  //   x: {
-                  //     stacked: true,
-                  //     grid: {
-                  //       color: "rgba(0, 0, 0, 0.05)", // Light gray color with 5% opacity
-                  //       borderDash: [8, 4], // Dotted line style
-                  //     },
-                  //   },
-                  //   y: {
-                  //     stacked: true,
-                  //     title: {
-                  //       display: true,
-                  //       text: "Cost (Rs)",
-                  //     },
-                  //   },
-                  // },
-                }}
+                options={options}
               />
             </div>
           ) : (
@@ -192,4 +216,4 @@ const CostChart = ({
   );
 };
 
-export default CostChart;
+export default CurrentHistorical;
