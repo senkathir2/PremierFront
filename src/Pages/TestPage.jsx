@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import DashHeader from "../Components/DashHeader";
 import AMFgauge from "../Components/AmfGauge";
 import KPI from "../Components/KPI";
@@ -47,11 +47,6 @@ const TestPage = () => {
     console.log(itemId);
   };
 
-  useEffect(() => {
-
-  }, [key])
-
-
   return (
     <Container>
       <SidebarComp>
@@ -78,7 +73,7 @@ const TestPage = () => {
             patterns and areas for improvement.
           </span>
         </div>
-        <div style={{ width: "70vw" }}>
+        <div style={{ width: "80vw" }}>
           <BottomTimeSeries apikey={key} />
         </div>
         <Outlet />

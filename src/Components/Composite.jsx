@@ -307,56 +307,151 @@ const RealTimeChart = ({ apiKey }) => {
         <div className="title">Energy Consumption</div>
         <div className="legend-container-two">
           <div className="legend-item">
-            <span className="legend-color-box v1" />
-            <span>Avg Current</span>
+            <span className="legend-color-box" style={{backgroundColor: '#C72F08'}}/>
+            <span>R Active</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v1" />
-            <span>R phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#E6B148'}}/>
+            <span>Y Active</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v2" />
-            <span>Y phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#0171DB'}}/>
+            <span>B Active</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v3" />
-            <span>B phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#E45D3A'}}/>
+            <span>R App</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v1" />
-            <span>Avg Current</span>
+            <span className="legend-color-box" style={{backgroundColor: '#B38A38'}}/>
+            <span>Y App</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v1" />
-            <span>R phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#0158AA'}}/>
+            <span>B App</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v2" />
-            <span>Y phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#9B2406'}}/>
+            <span>R Reactive</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v3" />
-            <span>B phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#FFD173'}}/>
+            <span>Y Reactive</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box v3" />
-            <span>B phase</span>
+            <span className="legend-color-box" style={{backgroundColor: '#3498F5'}}/>
+            <span>B Reactive</span>
           </div>
         </div>
         <div className="chart-size">
           <Line data={chartData} options={options} />
         </div>
       </div>
-      {/* <div className="value-cont">
+      <div className="value-cont">
         <div className="value-heading">Energy Consumption</div>
-        <div className="current-value">Current Value</div>
-        <div className="power-value">
-          {activeData.length > 0
-            ? `${activeData[activeData.length - 1].kwh.toFixed(2)} `
-            : "0.00"}{" "}
-          <span className="value-span">kWh</span>
+        <div className="current-value">Recent Value</div>
+        <div className="legend-container" style= {{ marginTop: '0px', justifyItems: "start", justifyContent: "center"}}>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box" style={{backgroundColor: '#C72F08'}}/> R Active
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rActiveRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box" style={{backgroundColor: '#E6B148'}}/> Y Active
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].yActiveRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#0171DB'}}/> B Active
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].bActiveRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#E45D3A'}}/> R App
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#B38A38'}}/>Y App
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#0158AA'}}/>B App
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#9B2406'}}/>R Reactive
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#FFD173'}}/>Y Reactive
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#3498F5'}}/> B Reactive
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].rAppRecent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">kwh</span>
+            </div>
+          </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

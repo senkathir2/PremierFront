@@ -50,18 +50,20 @@ const PowerFactorGauge = ({apikey}) => {
 
   const fetchPowerFactor = async () => {
     try {
-      const response = await axios.get(
-        sidbarInfo.apiUrls[apikey].apiUrl
-      );
-      const powerFactorValue = Math.floor(response.data["recent data"].avg_power_factor*100);
-      setPowerFactor(powerFactorValue);
-
-      if (powerFactorValue >= 0.95) {
-        setPowerQuality("Good");
-      } else if (powerFactorValue >= 0.85) {
-        setPowerQuality("Average");
-      } else {
-        setPowerQuality("Bad");
+      if(sidbarInfo.apiUrls[apikey]){
+        const response = await axios.get(
+          sidbarInfo.apiUrls[apikey].apiUrl
+        );
+        const powerFactorValue = Math.floor(response.data["recent data"].avg_power_factor*100);
+        setPowerFactor(powerFactorValue);
+  
+        if (powerFactorValue >= 0.95) {
+          setPowerQuality("Good");
+        } else if (powerFactorValue >= 0.85) {
+          setPowerQuality("Average");
+        } else {
+          setPowerQuality("Bad");
+        }
       }
     } catch (error) {
       console.error("Error fetching power factor data:", error);
@@ -69,14 +71,16 @@ const PowerFactorGauge = ({apikey}) => {
   };
 
   useEffect(() => {
-    fetchPowerFactor();
+    if(sidbarInfo.apiUrls[apikey]){
+      fetchPowerFactor();
+    }
     const interval = setInterval(fetchPowerFactor, 5000); // Update every 5 seconds
     return () => clearInterval(interval);
   }, [apikey]);
 
   return (
     <>
-      <div className="kpi-cont" style={{width: "10vw"}}>
+      <div className="kpi-cont" style={{ marginBottom: "1vh"}}>
         <Top>
           <Title>Power Factor</Title>
         </Top>

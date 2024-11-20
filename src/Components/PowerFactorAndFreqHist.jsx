@@ -49,6 +49,7 @@ const PowerfactorAndFreqHistorical = ({
               pointRadius: 0,
               pointHoverRadius: 0,
               tension: 0.4, // Smooth line
+              yAxisID: 'y'
             },
             {
               label: "Frequency",
@@ -60,6 +61,7 @@ const PowerfactorAndFreqHistorical = ({
               pointRadius: 0,
               pointHoverRadius: 0,
               tension: 0.4, // Smooth line
+              yAxisID: 'y1'
             },
             
         ]
@@ -140,12 +142,24 @@ const PowerfactorAndFreqHistorical = ({
       y: {
         title: {
           display: true,
-          text: "Volatage (V)",
+          text: "Powerfactor",
         },
         grid: {
           color: "rgba(0, 0, 0, 0.05)",
           borderDash: [5, 5],
         },
+        position: 'left'
+      },
+      y1: {
+        title: {
+          display: true,
+          text: "Frequency (Hz)",
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0.05)",
+          borderDash: [5, 5],
+        },
+        position: 'right'
       },
     },
     plugins: {

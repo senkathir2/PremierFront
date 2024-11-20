@@ -8,7 +8,7 @@ const WeatherWidgetContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2vh;
-  height: 100%;
+  height: 57vh;
   width: 100%;
 `;
 
@@ -82,6 +82,12 @@ const AlertsContainer = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const AlertItem = styled.div`
@@ -89,6 +95,8 @@ const AlertItem = styled.div`
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #eee;
+  width: 95%;
+  justify-content: center;
   &:last-child {
     border-bottom: none;
   }
@@ -179,6 +187,20 @@ const WeatherWidget = () => {
 
       <AlertsContainer>
         <div>Alerts</div>
+        <AlertItem>
+          <AlertIcon />
+          <AlertText>
+            <Date>July 15, 2024</Date>
+            <div>A new Monthly report is ready to Download!</div>
+          </AlertText>
+        </AlertItem>
+        <AlertItem>
+          <AlertIcon />
+          <AlertText>
+            <Date>July 15, 2024</Date>
+            <div>A new Monthly report is ready to Download!</div>
+          </AlertText>
+        </AlertItem>
         <AlertItem>
           <AlertIcon />
           <AlertText>

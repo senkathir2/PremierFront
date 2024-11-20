@@ -30,7 +30,12 @@ const Paragraph = styled.p`
 
 const Sidebar = ({handleItemId}) => {
   const [key, setKey] = useState("")
+  const [topBarSelection,  setTopBarSelection] = useState("")
   const location = useLocation()
+
+  useEffect(() => {
+    setTopBarSelection(location.pathname.split('/')[2])
+  },[location])
 
   const handleItemIdChange = (itemId) => {
     handleItemId(itemId)
@@ -38,7 +43,13 @@ const Sidebar = ({handleItemId}) => {
 
   return (
     <Container>
-      <SidebarTree treeArray={SideBarInfo.sideBarTreeArray[location.pathname.split('/')[2]]} handleItemIdChange={handleItemIdChange}/>
+      {topBarSelection &&
+        <SidebarTree
+          treeArray={SideBarInfo.sideBarTreeArray[topBarSelection]}
+          topBarSelection={topBarSelection}
+          handleItemIdChange={handleItemIdChange}
+        />
+      }
     </Container>
   );
 };

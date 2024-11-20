@@ -47,6 +47,7 @@ const BottomTimeSeries = ({apikey}) => {
 
   // Fetch data on initial render and whenever startDate, endDate, or timeperiod changes
   useEffect(() => {
+    setData(null)
     if (startDate && endDate && sidbarInfo.apiUrls[apikey]) {
       fetchData(startDate, endDate, timeperiod);
     }
@@ -262,7 +263,7 @@ const BottomTimeSeries = ({apikey}) => {
             timeperiod={timeperiod}
             setTimeperiod={setTimeperiod}
             backgroundColors={backgroundColorsWithOpacity}
-          />
+          /> */}
 
           <div style={{ marginTop: "5vh" }}>
             {data && (
@@ -286,7 +287,7 @@ const BottomTimeSeries = ({apikey}) => {
                 setDateRange={setDateRange}
               />
             )}
-          </div> */}
+          </div>
         </>
       )}
     </div>

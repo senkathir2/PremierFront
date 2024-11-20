@@ -49,10 +49,13 @@
   line-height: 24px; /* 171.429% */
   display: flex;
   gap: 0.5vw;
-  padding: 10px 20px 10px 20px;
+  padding: 5px 10px 5px 10px;
+  align-items: center;
   border-radius: var(--Surface-border-radius---radius-s-xs, 4px);
 }
 
 .emsbuttonicon {
+  display: flex;
+  align-items: center;
   color: #fff;
 }

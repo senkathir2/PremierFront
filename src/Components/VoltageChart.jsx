@@ -229,15 +229,15 @@ const RealTimeVoltageChart = ({ apiKey }) => {
             <span>B Voltage</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box ln" />
+            <span className="legend-color-box" style={{backgroundColor: '#DC8006'}}/>
             <span>RY Voltage</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box ln" />
+            <span className="legend-color-box" style={{backgroundColor: '#16896B'}}/>
             <span>YB Voltage</span>
           </div>
           <div className="legend-item">
-            <span className="legend-color-box ln" />
+            <span className="legend-color-box" style={{backgroundColor: '#6036D4'}}/>
             <span>BR Voltage</span>
           </div>
         </div>
@@ -245,17 +245,17 @@ const RealTimeVoltageChart = ({ apiKey }) => {
           <Line data={voltageChartData} options={options} />
         </div>
       </div>
-      {/* <div className="value-cont">
+      <div className="value-cont">
         <div className="value-heading">Voltage</div>
-        <div className="current-value">Current Value</div>
-        <div className="legend-container">
+        <div className="current-value">Recent Value</div>
+        <div className="legend-container" style= {{ marginTop: '0px', justifyItems: "start", justifyContent: "center"}}>
           <div className="legend-item-two">
             <div className="value-name">
-              <span className="legend-color-box v1" /> V1 Voltage
+              <span className="legend-color-box v1" /> R Voltage
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebV1.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].Vr.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">V</span>
             </div>
@@ -263,11 +263,11 @@ const RealTimeVoltageChart = ({ apiKey }) => {
           <div className="legend-item-two">
             <div className="value-name">
               <span className="legend-color-box v2" />
-              V2 Voltage
+              Y Voltage
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebV2.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].Vy.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">V</span>
             </div>
@@ -275,29 +275,53 @@ const RealTimeVoltageChart = ({ apiKey }) => {
           <div className="legend-item-two">
             <div className="value-name">
               <span className="legend-color-box v3" />
-              V3 Voltage
+              B Voltage
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebV3.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].Vb.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">V</span>
             </div>
           </div>
           <div className="legend-item-two">
             <div className="value-name">
-              <span className="legend-color-box ln" />
-              LN Voltage
+              <span className="legend-color-box ln" style={{backgroundColor: '#DC8006'}}/>
+              RY Voltage
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebLN.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].Vry.toFixed(2) 
+                : "0.00"}{" "}
+              <span className="value-span">V</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box ln"style={{backgroundColor: '#16896B'}} />
+              YB Voltage
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].Vyb.toFixed(2) 
+                : "0.00"}{" "}
+              <span className="value-span">V</span>
+            </div>
+          </div>
+          <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box ln" style={{backgroundColor: '#6036D4'}}/>
+              BR Voltage
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].Vbr.toFixed(2) 
                 : "0.00"}{" "}
               <span className="value-span">V</span>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -69,22 +69,26 @@ const FrequencyComponent = ({ apikey }) => {
 
   const fetchFrequency = async () => {
     try {
-      const response = await axios.get(sidbarInfo.apiUrls[apikey].apiUrl);
-      const frquencyValue = response.data["recent data"].frequency;
-      setFrequency(frquencyValue);
+      if(sidbarInfo.apiUrls[apikey]){
+        const response = await axios.get(sidbarInfo.apiUrls[apikey].apiUrl);
+        const frquencyValue = response.data["recent data"].frequency;
+        setFrequency(frquencyValue);
+      }
     } catch (error) {
       console.error("Error fetching power factor data:", error);
     }
   };
 
   useEffect(() => {
-    fetchFrequency();
+    if(sidbarInfo.apiUrls[apikey]){
+      fetchFrequency();
+    }
     const interval = setInterval(fetchFrequency, 5000); // Update every 5 seconds
     return () => clearInterval(interval);
   }, [apikey]);
 
   return (
-    <Card className="kpi-cont" style={{ width: "10vw" }}>
+    <Card className="kpi-cont" style={{ width: "11vw" }}>
       <Top>
         <Title>Frequency</Title>
       </Top>

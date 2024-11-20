@@ -180,7 +180,7 @@ const RealTimeCurrentChart = ({ apiKey }) => {
         <div className="title">Current</div>
         <div className="legend-container-two">
           <div className="legend-item">
-            <span className="legend-color-box v1" />
+            <span className="legend-color-box v1" style={{backgroundColor: '#6036D4'}}/>
             <span>Avg Current</span>
           </div>
           <div className="legend-item">
@@ -200,17 +200,28 @@ const RealTimeCurrentChart = ({ apiKey }) => {
           <Line data={currentChartData} options={options} />
         </div>
       </div>
-      {/* <div className="value-cont">
+      <div className="value-cont">
         <div className="value-heading">Current</div>
-        <div className="current-value">Current Value</div>
-        <div className="legend-container">
+        <div className="current-value">Recent Value</div>
+        <div className="legend-container" style= {{ marginTop: '0px', justifyItems: "start", justifyContent: "center"}}>
+        <div className="legend-item-two">
+            <div className="value-name">
+              <span className="legend-color-box v1" style={{backgroundColor: '#6036D4'}} /> Avg Current
+            </div>
+            <div className="value">
+              {data.length > 0
+                ? data[data.length - 1].avgCurrent.toFixed(2)
+                : "0.00"}{" "}
+              <span className="value-span">A</span>
+            </div>
+          </div>
           <div className="legend-item-two">
             <div className="value-name">
               <span className="legend-color-box v1" /> R phase
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebR.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].rCurrent.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">A</span>
             </div>
@@ -220,8 +231,8 @@ const RealTimeCurrentChart = ({ apiKey }) => {
               <span className="legend-color-box v2" />Y phase
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebY.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].yCurrent.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">A</span>
             </div>
@@ -231,14 +242,14 @@ const RealTimeCurrentChart = ({ apiKey }) => {
               <span className="legend-color-box v3" />B phase
             </div>
             <div className="value">
-              {activeData.length > 0
-                ? activeData[activeData.length - 1].ebB.toFixed(2)
+              {data.length > 0
+                ? data[data.length - 1].bCurrent.toFixed(2)
                 : "0.00"}{" "}
               <span className="value-span">A</span>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
