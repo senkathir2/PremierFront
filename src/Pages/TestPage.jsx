@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import styled from "styled-components";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import DashHeader from "../Components/DashHeader";
 import AMFgauge from "../Components/AmfGauge";
 import KPI from "../Components/KPI";
@@ -41,11 +41,17 @@ const ChartContainer = styled.div`
 
 const TestPage = () => {
   const [key, setKey] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   const handleItemIdChange = (itemId) => {
-    setKey(itemId);
+    //setKey(itemId);
     console.log(itemId);
   };
+
+  useEffect(() => {
+    setKey(searchParams.get("key"))
+  },[searchParams])
 
   return (
     <Container>

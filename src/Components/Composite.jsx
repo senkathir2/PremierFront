@@ -17,6 +17,7 @@ import "chartjs-adapter-date-fns";
 import SideBarInfo from "../sidbarInfo";
 import sidbarInfo from "../sidbarInfo";
 import { useLocation } from "react-router-dom";
+import dayjs from "dayjs";
 
 ChartJS.register(
   CategoryScale,
@@ -268,7 +269,7 @@ const RealTimeChart = ({ apiKey }) => {
       y: {
         title: {
           display: true,
-          text: "Power (kWh)",
+          text: "Power (kW)",
         },
         //min: maxKwh - 5, // dynamically adjust the scale
         //max: maxKwh + 5, // dynamically adjust the scale
@@ -288,7 +289,7 @@ const RealTimeChart = ({ apiKey }) => {
               label += ": ";
             }
             if (context.parsed.y !== null) {
-              label += context.parsed.y + " kWh";
+              label += context.parsed.y + " kW";
             }
             return label;
           },
@@ -304,7 +305,7 @@ const RealTimeChart = ({ apiKey }) => {
   return (
     <div className="containerchart">
       <div className="chart-cont">
-        <div className="title">Energy Consumption</div>
+        <div className="title">Power</div>
         <div className="legend-container-two">
           <div className="legend-item">
             <span className="legend-color-box" style={{backgroundColor: '#C72F08'}}/>
@@ -348,7 +349,7 @@ const RealTimeChart = ({ apiKey }) => {
         </div>
       </div>
       <div className="value-cont">
-        <div className="value-heading">Energy Consumption</div>
+        <div className="value-heading">Power</div>
         <div className="current-value">Recent Value</div>
         <div className="legend-container" style= {{ marginTop: '0px', justifyItems: "start", justifyContent: "center"}}>
           <div className="legend-item-two">
@@ -359,7 +360,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rActiveRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -370,7 +371,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].yActiveRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -381,7 +382,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].bActiveRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -392,7 +393,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -403,7 +404,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -414,7 +415,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -425,7 +426,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -436,7 +437,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
           <div className="legend-item-two">
@@ -447,7 +448,7 @@ const RealTimeChart = ({ apiKey }) => {
               {data.length > 0
                 ? data[data.length - 1].rAppRecent.toFixed(2)
                 : "0.00"}{" "}
-              <span className="value-span">kwh</span>
+              <span className="value-span">kW</span>
             </div>
           </div>
         </div>

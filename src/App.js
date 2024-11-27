@@ -6,6 +6,7 @@ import PhaseOverview from "./Pages/PhaseOverview";
 import Dashboard from "./Pages/Dashboard";
 import TestPage from "./Pages/TestPage";
 import Header from "./Components/Header";
+import Compare from "./Pages/Compare";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route path="peppl_p2" element={<PhaseOverview />} />
           <Route path="peppl_p3" element={<PhaseOverview />} />
+          <Route path="compare" element={<Compare />}></Route>
         </Routes>
       </HashRouter>
     </div>
