@@ -13,6 +13,7 @@ const SidebarTree = ({treeArray, handleItemIdChange, topBarSelection}) => {
 
   useEffect(() => {
     setSelectedItemId(`overview_${topBarSelection}`)
+    //navigate(`${location.pathname}?key=${itemId}`)
   }, [topBarSelection])
 
   // const handleChange = (itemId) => {
@@ -22,6 +23,7 @@ const SidebarTree = ({treeArray, handleItemIdChange, topBarSelection}) => {
   const handleItemSelectionChange = (event, itemId, isSelected) => {
     if(isSelected){
       setSelectedItemId(itemId)
+      navigate(`${location.pathname}?key=${itemId}`)
     }
   }
 

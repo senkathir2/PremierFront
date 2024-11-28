@@ -183,9 +183,12 @@ const apiUrls = {
       "https://www.therion.co.in/api/dg2s3reading/",
     ]
   },
+  ups_2b: {
+    apiUrl: 'http://14.96.26.26:8080/api/p1_pcc2_ups2b/'
+  },
   ups_2c: {
     apiUrl: "http://14.96.26.26:8080/api/p1_ups2_incomer2c/"
-  }
+  },
 }
 
 export default {sideBarTreeArray , apiUrls};

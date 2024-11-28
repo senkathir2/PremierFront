@@ -154,7 +154,7 @@ const DashHeader = ({ apikey }) => {
   return (
     <div style={{ marginBottom: '4vh' }}>
       <DashboardHeader>
-        <DashboardTitle>{apikey.toUpperCase()}</DashboardTitle>
+        <DashboardTitle>{apikey?.toUpperCase()}</DashboardTitle>
         <TimeBar
           setStartDate={setStartDate}
           setEndDate={setEndDate}
