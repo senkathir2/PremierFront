@@ -9,6 +9,9 @@ import "../StackedBarDGEB.css"; // Import the CSS file
 
 const CurrentHistorical = ({
   data,
+  secondFeederData,
+  firstFeeder,
+  secondFeeder,
   startDate,
   setStartDate,
   endDate,
@@ -24,9 +27,11 @@ const CurrentHistorical = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (data && data["resampled data"]) {
+    if (data && data["resampled data"] && secondFeederData && secondFeederData["resampled data"]) {
+      setError(null)
       try {
         const resampledData = data["resampled data"];
+        const secondFeederResampledData = secondFeederData["resampled data"]
 
         // Define the keys to include manually and their custom labels
         const kwKeys = [
@@ -40,7 +45,7 @@ const CurrentHistorical = ({
 
         const datasets = [
             {
-              label: "Avg Current",
+              label: "Avg Current "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) => item["avg_current"]),
               borderColor: "#6036D4",
               borderWidth: 2,
@@ -49,7 +54,7 @@ const CurrentHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "R Current",
+              label: "R Current "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) => item["r_current"]),
               borderColor: "#D33030",
               borderWidth: 2,
@@ -58,7 +63,7 @@ const CurrentHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Y Current",
+              label: "Y Current "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) => item["y_current"]),
               borderColor: "#FFB319",
               borderWidth: 2,
@@ -67,8 +72,44 @@ const CurrentHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "B Current",
+              label: "B Current "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) => item["b_current"]),
+              borderColor: "#017EF3",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "Avg Current "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) => item["avg_current"]),
+              borderColor: "#6036D4",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "R Current "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) => item["r_current"]),
+              borderColor: "#D33030",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "Y Current "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) => item["y_current"]),
+              borderColor: "#FFB319",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "B Current "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) => item["b_current"]),
               borderColor: "#017EF3",
               borderWidth: 2,
               pointRadius: 0,
@@ -163,7 +204,7 @@ const CurrentHistorical = ({
     },
     plugins: {
       legend: {
-        display: false, // Hide default legend
+        display: true, // Hide default legend
       },
     },
   };

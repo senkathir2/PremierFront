@@ -15,6 +15,7 @@ import VoltageHistorical from "../Components/CompareScreenComp/VoltageHist";
 import CurrentHistorical from "../Components/CompareScreenComp/CurrentHist";
 import PowerfactorAndFreqHistorical from "../Components/CompareScreenComp/PowerFactorAndFreqHist";
 import testData from "../testdata.json";
+import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 
 const Seperator = styled.div`
@@ -54,8 +55,8 @@ const Compare = ({ apikey, key }) => {
   const [endDate, setEndDate] = useState(dayjs());
   const [timeperiod, setTimeperiod] = useState("H");
   const [dateRange, setDateRange] = useState("today");
-  const [firstFeederData, setFirstFeederData] = useState(testData);
-  const [secondFeederData, setSecondFeederData] = useState(testData);
+  const [firstFeederData, setFirstFeederData] = useState();
+  const [secondFeederData, setSecondFeederData] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const [firstFeeder, setFirstFeeder] = useState(searchParams.get("feeder_1"));
   const [secondFeeder, setSecondFeeder] = useState(searchParams.get("feeder_2"));
@@ -63,32 +64,22 @@ const Compare = ({ apikey, key }) => {
   // Function to fetch data
   const fetchData = async (start, end, period) => {
     try {
-      const response = await fetch(
-        `${
-          sidbarInfo.apiUrls[apikey].apiUrl
-        }?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`
-      );
-      const result = await response.json();
-      setFirstFeederData(result);
-      console.log("datatimedash", result);
+      const [firstFeederResponse, secondFeederResponse] = await Promise.all([
+        axios.get(`${sidbarInfo.apiUrls[firstFeeder].apiUrl}?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`),
+        axios.get(`${sidbarInfo.apiUrls[secondFeeder].apiUrl}?start_date_time=${start.toISOString()}&end_date_time=${end.toISOString()}&resample_period=${period}`),
+      ]);
+      setFirstFeederData(firstFeederResponse.data);
+      setSecondFeederData(secondFeederResponse.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    setFirstFeeder(searchParams.get("feeder_1"));
-    setSecondFeeder(searchParams.get("feeder_2"));
-  }, []);
-
-  useEffect(() => {
-    //setData(null);
-    if (startDate && endDate && sidbarInfo.apiUrls[apikey]) {
-      //fetchData(startDate, endDate, timeperiod);
+    if (startDate && endDate && sidbarInfo.apiUrls[firstFeeder] && sidbarInfo.apiUrls[secondFeeder]) {
+      fetchData(startDate, endDate, timeperiod);
     }
-    setFirstFeederData(testData);
-    setSecondFeederData(testData)
-  }, [startDate, endDate, timeperiod, apikey]);
+  }, [startDate, endDate, timeperiod]);
 
   const bgsource = ["#5630BC", "#8963EF", "#C4B1F7"];
 
@@ -102,15 +93,15 @@ const Compare = ({ apikey, key }) => {
         <AMFgauge />
         <KPI data={firstFeederData} />
         <div>
-          <PowerFactorGauge apikey={apikey} />
-          <FrequencyComponent apikey={apikey} />
+          <PowerFactorGauge apikey={firstFeeder} />
+          <FrequencyComponent apikey={firstFeeder} />
         </div>
         <Seperator></Seperator>
         <AMFgauge />
         <KPI data={secondFeederData} />
         <div>
-          <PowerFactorGauge apikey={apikey} />
-          <FrequencyComponent apikey={apikey} />
+          <PowerFactorGauge apikey={secondFeeder} />
+          <FrequencyComponent apikey={secondFeeder} />
         </div>
       </KPIContainer>
       <RealTimeChartContainer>
@@ -152,6 +143,8 @@ const Compare = ({ apikey, key }) => {
         <VoltageHistorical
           data={firstFeederData}
           secondFeederData={secondFeederData}
+          firstFeeder={firstFeeder}
+          secondFeeder={secondFeeder}
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}
@@ -165,6 +158,8 @@ const Compare = ({ apikey, key }) => {
         <CurrentHistorical
           data={firstFeederData}
           secondFeederData={secondFeederData}
+          firstFeeder={firstFeeder}
+          secondFeeder={secondFeeder}
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}
@@ -178,6 +173,8 @@ const Compare = ({ apikey, key }) => {
         <PowerfactorAndFreqHistorical
           data={firstFeederData}
           secondFeederData={secondFeederData}
+          firstFeeder={firstFeeder}
+          secondFeeder={secondFeeder}
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}

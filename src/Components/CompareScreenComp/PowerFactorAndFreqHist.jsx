@@ -9,6 +9,9 @@ import "../StackedBarDGEB.css"; // Import the CSS file
 
 const PowerfactorAndFreqHistorical = ({
   data,
+  secondFeederData,
+  firstFeeder,
+  secondFeeder,
   startDate,
   setStartDate,
   endDate,
@@ -25,8 +28,10 @@ const PowerfactorAndFreqHistorical = ({
 
   useEffect(() => {
     if (data && data["resampled data"]) {
+      setError(null)
       try {
         const resampledData = data["resampled data"];
+        const secondFeederResampledData = secondFeederData["resampled data"]
 
         // Define the keys to include manually and their custom labels
         const kwKeys = [
@@ -40,7 +45,7 @@ const PowerfactorAndFreqHistorical = ({
 
         const datasets = [
             {
-              label: "Powerfactor",
+              label: "Powerfactor "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["avg_power_factor"]
               ),
@@ -52,7 +57,7 @@ const PowerfactorAndFreqHistorical = ({
               yAxisID: 'y'
             },
             {
-              label: "Frequency",
+              label: "Frequency "+firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["frequency"]
               ),
@@ -63,7 +68,30 @@ const PowerfactorAndFreqHistorical = ({
               tension: 0.4, // Smooth line
               yAxisID: 'y1'
             },
-            
+            {
+              label: "Powerfactor "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["avg_power_factor"]
+              ),
+              borderColor: "#D33030",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+              yAxisID: 'y'
+            },
+            {
+              label: "Frequency "+secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["frequency"]
+              ),
+              borderColor: "#FFB319",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+              yAxisID: 'y1'
+            },
         ]
 
         setChartData({
@@ -164,7 +192,7 @@ const PowerfactorAndFreqHistorical = ({
     },
     plugins: {
       legend: {
-        display: false, // Hide default legend
+        display: true, // Hide default legend
       },
     },
   };

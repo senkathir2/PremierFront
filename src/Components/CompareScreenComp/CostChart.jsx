@@ -28,6 +28,7 @@ const CostChart = ({
 
   useEffect(() => {
     if (data && data["resampled data"]) {
+      setError(null)
       try {
         const resampledData = data["resampled data"];
         const feeder2ResampledData = secondFeederData["resampled data"]
@@ -43,14 +44,14 @@ const CostChart = ({
 
         const datasets = [
           {
-            label: `${firstFeeder} Cost`,
+            label: `${firstFeeder.toUpperCase()} Cost`,
             data: resampledData.map(
               (item) => (item["app_energy_export"] || 0) * 10
             ), // Multiply kW by 10 to get cost
             backgroundColor: "#4E46B4",
           },
           {
-            label: `${secondFeeder} Cost`,
+            label: `${secondFeeder.toUpperCase()} Cost`,
             data: feeder2ResampledData.map(
               (item) => (item["app_energy_export"] || 0) * 10
             ), // Multiply kW by 10 to get cost

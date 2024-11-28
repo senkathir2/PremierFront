@@ -9,6 +9,9 @@ import "../StackedBarDGEB.css"; // Import the CSS file
 
 const VoltageHistorical = ({
   data,
+  secondFeederData,
+  firstFeeder,
+  secondFeeder,
   startDate,
   setStartDate,
   endDate,
@@ -24,10 +27,11 @@ const VoltageHistorical = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (data && data["resampled data"]) {
+    if (data && data["resampled data"] && secondFeederData && secondFeederData["resampled data"]) {
+      setError(null)
       try {
         const resampledData = data["resampled data"];
-
+        const secondFeederResampledData = secondFeederData["resampled data"]
         // Define the keys to include manually and their custom labels
         const kwKeys = [
           { key: "EBS10Reading_kw", label: "EB Supply" },
@@ -40,7 +44,7 @@ const VoltageHistorical = ({
 
         const datasets = [
             {
-              label: "Vr Voltage",
+              label: "R Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["r_phase_voltage"]
               ),
@@ -51,7 +55,7 @@ const VoltageHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Vy Voltage",
+              label: "Y Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["y_phase_voltage"]
               ),
@@ -62,7 +66,7 @@ const VoltageHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Vb Voltage",
+              label: "B Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["b_phase_voltage"]
               ),
@@ -73,7 +77,7 @@ const VoltageHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Vry Voltage",
+              label: "RY Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["ry_voltage"]
               ),
@@ -84,7 +88,7 @@ const VoltageHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Vyb Voltage",
+              label: "YB Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
                 item["yb_voltage"]
               ),
@@ -95,8 +99,74 @@ const VoltageHistorical = ({
               tension: 0.4, // Smooth line
             },
             {
-              label: "Vbr Voltage",
+              label: "BR Voltage " + firstFeeder.toUpperCase(),
               data: resampledData.map((item) =>
+                item["br_voltage"]
+              ),
+              borderColor: "#6036D4",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "R Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["r_phase_voltage"]
+              ),
+              borderColor: "#D33030",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "Y Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["y_phase_voltage"]
+              ),
+              borderColor: "#FFB319",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "B Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["b_phase_voltage"]
+              ),
+              borderColor: "#017EF3",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "RY Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["ry_voltage"]
+              ),
+              borderColor: "#DC8006",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "YB Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
+                item["yb_voltage"]
+              ),
+              borderColor: "#16896B",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0.4, // Smooth line
+            },
+            {
+              label: "BR Voltage " + secondFeeder.toUpperCase(),
+              data: secondFeederResampledData.map((item) =>
                 item["br_voltage"]
               ),
               borderColor: "#6036D4",
@@ -122,7 +192,7 @@ const VoltageHistorical = ({
       setLoading(false);
       setError("No resampled data available");
     }
-  }, [data, timeperiod, backgroundColors]);
+  }, [data, secondFeederData, timeperiod, backgroundColors]);
 
   // Function to generate x-axis labels based on timeperiod
   const generateXAxisLabels = (resampledData) => {

@@ -27,7 +27,8 @@ const StackedBarDGEB = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (data && data["resampled data"]) {
+    if (data && data["resampled data"] && secondFeederData && secondFeederData["resampled data"]) {
+      setError(null)
       try {
         const resampledData = data["resampled data"];
         const feeder2ResampledData = secondFeederData["resampled data"]
@@ -53,12 +54,12 @@ const StackedBarDGEB = ({
 
         const datasets = [
           {
-            label: `${firstFeeder} Energy`,
+            label: `${firstFeeder.toUpperCase()} Energy`,
             data: resampledData.map((item) => item["app_energy_export"]),
             backgroundColor: resampledData.map((item) => {return item["app_energy_export"] > 1400 ? '#C72F08': '#4E46B4'})
           },
           {
-            label: `${secondFeeder} Energy`,
+            label: `${secondFeeder.toUpperCase()} Energy`,
             data: feeder2ResampledData.map((item) => item["app_energy_export"]),
             backgroundColor: resampledData.map((item) => {return item["app_energy_export"] > 1400 ? '#C72F08': '#1e13b5'})
           }
@@ -78,7 +79,7 @@ const StackedBarDGEB = ({
       setLoading(false);
       setError("No resampled data available");
     }
-  }, [data, timeperiod, backgroundColors]);
+  }, [data, timeperiod, backgroundColors, secondFeederData]);
 
   // Function to generate x-axis labels based on timeperiod
   const generateXAxisLabels = (resampledData) => {
